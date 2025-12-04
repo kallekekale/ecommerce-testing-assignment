@@ -7,7 +7,7 @@
  */
 
 import { jest } from "@jest/globals";
-import filter from "./filter.js";
+import filter from "../../src/filter.js";
 
 describe("filter - AI-Assisted Tests", () => {
   describe("Basic filtering", () => {

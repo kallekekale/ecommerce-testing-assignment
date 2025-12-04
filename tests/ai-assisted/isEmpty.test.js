@@ -133,6 +133,19 @@ describe("isEmpty - AI-Assisted Tests", () => {
       const instance = new TestClass();
       expect(isEmpty(instance)).toBe(false);
     });
+
+    test("should return true for prototype object", () => {
+      function TestClass() {}
+      TestClass.prototype.protoProp = "value";
+      expect(isEmpty(TestClass.prototype)).toBe(true);
+    });
+
+    test("should return false for prototype object with added properties", () => {
+      function TestClass() {}
+      TestClass.prototype.prop1 = "value1";
+      TestClass.prototype.prop2 = "value2";
+      expect(isEmpty(TestClass.prototype)).toBe(false);
+    });
   });
 
   describe("Map and Set", () => {
@@ -220,9 +233,7 @@ describe("isEmpty - AI-Assisted Tests", () => {
     });
 
     test("should return false for long string", () => {
-      expect(isEmpty("This is a long string with many characters")).toBe(
-        false
-      );
+      expect(isEmpty("This is a long string with many characters")).toBe(false);
     });
 
     test("should return false for string with special characters", () => {

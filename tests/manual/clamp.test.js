@@ -71,4 +71,43 @@ describe("clamp - Manual Tests", () => {
     });
   });
 
+  describe("Decimal numbers", () => {
+    test("should work with decimal values", () => {
+      expect(clamp(2.5, 0, 5)).toBe(2.5);
+    });
+
+    test("should clamp decimal below lower bound", () => {
+      expect(clamp(0.5, 1.0, 5.0)).toBe(1.0);
+    });
+
+    test("should clamp decimal above upper bound", () => {
+      expect(clamp(5.5, 0.0, 5.0)).toBe(5.0);
+    });
+
+    test("should handle very small decimals", () => {
+      expect(clamp(0.001, 0, 1)).toBe(0.001);
+    });
+  });
+
+  describe("Zero handling", () => {
+    test("should handle zero as number", () => {
+      expect(clamp(0, -5, 5)).toBe(0);
+    });
+
+    test("should handle zero as lower bound", () => {
+      expect(clamp(-5, 0, 10)).toBe(0);
+    });
+
+    test("should handle zero as upper bound", () => {
+      expect(clamp(5, -10, 0)).toBe(0);
+    });
+
+    test("should handle all zeros", () => {
+      expect(clamp(0, 0, 0)).toBe(0);
+    });
+
+    test("should distinguish -0 from +0", () => {
+      expect(clamp(-0, 0, 5)).toBe(-0);
+    });
+  });
 });

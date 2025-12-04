@@ -30,4 +30,27 @@ describe("clamp - Manual Tests", () => {
       expect(clamp(-15, -20, -10)).toBe(-15);
     });
   });
+
+  describe("Edge cases with undefined bounds", () => {
+    test("should treat undefined lower as no lower bound", () => {
+      expect(clamp(-100, undefined, 5)).toBe(-100);
+    });
+
+    test("should treat undefined upper as no upper bound", () => {
+      expect(clamp(100, -5, undefined)).toBe(100);
+    });
+
+    test("should work with both bounds undefined", () => {
+      expect(clamp(50, undefined, undefined)).toBe(50);
+    });
+
+    test("should clamp when only upper bound is defined", () => {
+      expect(clamp(10, undefined, 5)).toBe(5);
+    });
+
+    test("should clamp when only lower bound is defined", () => {
+      expect(clamp(-10, -5, undefined)).toBe(-5);
+    });
+  });
+
 });

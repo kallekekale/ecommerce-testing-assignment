@@ -18,4 +18,36 @@ describe("capitalize - Manual Tests", () => {
       expect(capitalize("Fred")).toBe("Fred");
     });
   });
+
+  describe("Edge cases", () => {
+    test("should handle empty string", () => {
+      expect(capitalize("")).toBe("");
+    });
+
+    test("should handle single character", () => {
+      expect(capitalize("a")).toBe("A");
+    });
+
+    test("should handle string with multiple words", () => {
+      expect(capitalize("hello world")).toBe("Hello world");
+    });
+
+    test("should handle string with numbers", () => {
+      expect(capitalize("123abc")).toBe("123abc");
+    });
+  });
+
+  describe("Different input types", () => {
+    test("should handle null by converting to string", () => {
+      expect(capitalize(null)).toBe("Null");
+    });
+
+    test("should handle undefined by converting to string", () => {
+      expect(capitalize(undefined)).toBe("Undefined");
+    });
+
+    test("should handle number input", () => {
+      expect(capitalize(123)).toBe("123");
+    });
+  });
 });

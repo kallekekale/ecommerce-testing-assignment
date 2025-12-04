@@ -53,4 +53,22 @@ describe("clamp - Manual Tests", () => {
     });
   });
 
+  describe("NaN handling", () => {
+    test("should return NaN when number is NaN", () => {
+      expect(clamp(NaN, -5, 5)).toBeNaN();
+    });
+
+    test("should handle NaN as lower bound", () => {
+      expect(clamp(0, NaN, 5)).toBe(0);
+    });
+
+    test("should handle NaN as upper bound", () => {
+      expect(clamp(0, -5, NaN)).toBe(0);
+    });
+
+    test("should handle all NaN values", () => {
+      expect(clamp(NaN, NaN, NaN)).toBeNaN();
+    });
+  });
+
 });

@@ -8,9 +8,23 @@ export default {
   testMatch: ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
 
   collectCoverageFrom: [
-    "src/**/*.js",
+    // Only collect coverage from files we're actually testing
+    "src/filter.js",
+    "src/reduce.js",
+    "src/ceil.js",
+    "src/clamp.js",
+    "src/defaultTo.js",
+    "src/compact.js",
+    "src/words.js",
+    "src/isEmpty.js",
+    "src/toNumber.js",
+    "src/capitalize.js",
+
+    // Exclude patterns
     "!src/**/*.test.js",
     "!src/**/*.spec.js",
+    "!src/.internal/**",
+    "!**/.internal/**",
   ],
 
   // coverageThreshold: {

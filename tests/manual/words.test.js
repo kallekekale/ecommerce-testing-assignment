@@ -51,4 +51,26 @@ describe("words - Manual Tests", () => {
       expect(words("hello-world_test")).toEqual(["hello", "world", "test"]);
     });
   });
+
+  describe("Edge cases", () => {
+    test("should throw error with undefined input", () => {
+      expect(() => words(undefined)).toThrow();
+    });
+
+    test("should throw error with null input", () => {
+      expect(() => words(null)).toThrow();
+    });
+
+    test("should throw error with number input", () => {
+      expect(() => words(123)).toThrow();
+    });
+
+    test("should throw error with boolean input", () => {
+      expect(() => words(true)).toThrow();
+    });
+
+    test("should throw error with object input", () => {
+      expect(() => words({ key: "value" })).toThrow();
+    });
+  });
 });

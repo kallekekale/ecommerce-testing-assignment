@@ -11,7 +11,6 @@ tests/
   manual/               # Manually written test suites
     README.md           # Documentation of manual approach
 src/                    # Source files under test
-coverage/               # Generated coverage reports
 ```
 
 ## Test Suites

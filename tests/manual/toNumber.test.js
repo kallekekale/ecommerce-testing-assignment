@@ -49,5 +49,25 @@ describe("toNumber - Manual Tests", () => {
     test("should return NaN for invalid strings", () => {
       expect(toNumber("abc")).toBeNaN();
     });
+
+    test("should handle binary strings", () => {
+      expect(toNumber("0b1010")).toBe(10);
+    });
+
+    test("should handle octal strings", () => {
+      expect(toNumber("0o12")).toBe(10);
+    });
+
+    test("should handle whitespace in strings", () => {
+      expect(toNumber("  42  ")).toBe(42);
+    });
+
+    test("should return NaN for bad hex strings", () => {
+      expect(toNumber("-0x1")).toBeNaN();
+    });
+
+    test("should handle negative Infinity", () => {
+      expect(toNumber(-Infinity)).toBe(-Infinity);
+    });
   });
 });

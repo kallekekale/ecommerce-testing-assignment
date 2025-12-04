@@ -69,5 +69,22 @@ describe("toNumber - Manual Tests", () => {
     test("should handle negative Infinity", () => {
       expect(toNumber(-Infinity)).toBe(-Infinity);
     });
+
+    test("should handle object with valueOf returning number", () => {
+      const obj = {
+        valueOf() {
+          return 42;
+        },
+      };
+      expect(toNumber(obj)).toBe(42);
+    });
+
+    test("should convert plain object to NaN", () => {
+      expect(toNumber({})).toBeNaN();
+    });
+
+    test("should handle empty string", () => {
+      expect(toNumber("")).toBe(0);
+    });
   });
 });

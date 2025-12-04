@@ -67,4 +67,75 @@ describe("reduce - Manual Tests", () => {
       expect(reduce([5], (sum, n) => sum + n)).toBe(5);
     });
   });
+
+  describe("Iteratee arguments", () => {
+    test("should pass correct 4 arguments to iteratee for arrays", () => {
+      const array = [1, 2, 3];
+      const args = [];
+      
+      reduce(
+        array,
+        (accumulator, value, index, collection) => {
+          args.push({ accumulator, value, index, collection });
+          return accumulator + value;
+        },
+        0
+      );
+
+      expect(args[0]).toEqual({
+        accumulator: 0,
+        value: 1,
+        index: 0,
+        collection: array,
+      });
+      expect(args[1]).toEqual({
+        accumulator: 1,
+        value: 2,
+        index: 1,
+        collection: array,
+      });
+      expect(args[2]).toEqual({
+        accumulator: 3,
+        value: 3,
+        index: 2,
+        collection: array,
+      });
+    });
+
+    test("should pass correct 4 arguments to iteratee for objects", () => {
+      const obj = { a: 1, b: 2 };
+      const args = [];
+
+      reduce(
+        obj,
+        (accumulator, value, key, collection) => {
+          args.push({ accumulator, value, key, collection });
+          return accumulator + value;
+        },
+        0
+      );
+
+      expect(args.length).toBe(2);
+      expect(args[0].collection).toBe(obj);
+      expect(args[1].collection).toBe(obj);
+    });
+  });
+
+  describe("Edge cases", () => {
+    test("should handle null collection with initial value", () => {
+      expect(reduce(null, (sum, n) => sum + n, 0)).toBe(0);
+    });
+
+    test("should handle undefined collection with initial value", () => {
+      expect(reduce(undefined, (sum, n) => sum + n, 0)).toBe(0);
+    });
+
+    test("should handle empty object with initial value", () => {
+      expect(reduce({}, (sum, value) => sum + value, 0)).toBe(0);
+    });
+
+    test("should handle null values in array", () => {
+      expect(reduce([1, null, 3], (sum, n) => sum + (n || 0), 0)).toBe(4);
+    });
+  });
 });

@@ -1,0 +1,10 @@
+# Ignore everything except test files
+*
+!tests/
+tests/*
+!tests/**/*.test.js
+
+# Always ignore
+node_modules/
+coverage/
+.git/

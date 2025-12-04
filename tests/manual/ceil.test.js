@@ -42,4 +42,30 @@ describe("ceil - Manual Tests", () => {
       expect(ceil(12345.6789, 2)).toBe(12345.68);
     });
   });
+
+  describe("Edge cases", () => {
+    test("should handle NaN", () => {
+      expect(ceil(NaN)).toBeNaN();
+    });
+
+    test("should handle Infinity", () => {
+      expect(ceil(Infinity)).toBe(Infinity);
+    });
+
+    test("should handle negative Infinity", () => {
+      expect(ceil(-Infinity)).toBe(-Infinity);
+    });
+
+    test("should handle negative number with precision", () => {
+      expect(ceil(-4.321, 2)).toBe(-4.32);
+    });
+
+    test("should handle undefined precision defaults to 0", () => {
+      expect(ceil(4.2, undefined)).toBe(5);
+    });
+
+    test("should handle null as 0", () => {
+      expect(ceil(null)).toBe(0);
+    });
+  });
 });
